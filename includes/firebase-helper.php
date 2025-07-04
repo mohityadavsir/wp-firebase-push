@@ -1,14 +1,12 @@
-// Assuming Firebase PHP SDK installed via composer (via /vendor)
-// You can include and configure it here for server-side send
-// You might use kreait/firebase-php package
-
+<?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Kreait\Firebase\Factory;
 
-function wpfp_get_firebase_instance() {
-    $config = get_option('wpfp_firebase_credentials');
-    if (!$config) return null;
+function wpfp_get_firebase_messaging() {
+    $path = plugin_dir_path(__FILE__) . '/../src/service-account.json';
+    if (!file_exists($path)) return null;
 
-    return (new Factory)->withServiceAccount($config)->createMessaging();
+    $factory = (new Factory)->withServiceAccount($path);
+    return $factory->createMessaging();
 }
