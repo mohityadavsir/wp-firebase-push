@@ -1,3 +1,4 @@
+<?php
 add_action('wp_ajax_wpfp_fetch_meta', function () {
     $url = esc_url_raw($_GET['url']);
     $html = file_get_contents($url);
